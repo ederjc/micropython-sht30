@@ -163,6 +163,19 @@ class SHT30():
         h_dec = (aux % 0xffff * 100) // 0xffff
         return t_int, t_dec, h_int, h_dec
 
+    def measure_dp(self):
+        """
+        Get the temperature (T) and approximate dew point (Tdp) measurements in
+        degrees Celsius. Dew point is calculated using a simple approximation
+        valid with RH > 0.5.
+
+        References:
+        * https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point
+        """
+
+        temp, humidity = self.measure()
+        return temp, temp - (100 - humidity) / 5
+
 
 class SHT30Error(Exception):
     """

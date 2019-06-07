@@ -7,6 +7,8 @@ __license__ = "Apache License 2.0. https://www.apache.org/licenses/LICENSE-2.0"
 
 # I2C address B 0x45 ADDR (pin 2) connected to VDD
 DEFAULT_I2C_ADDRESS = 0x45
+# I2C address A 0x44 ADDR (pin 2) connected to VSS
+ALTERNATE_I2C_ADDRESS = 0x44
 
 class SHT30():
     """

@@ -30,6 +30,17 @@ temperature, humidity = sensor.measure()
 print('Temperature:', temperature, 'ºC, RH:', humidity, '%')
 ```
 
+The `measure_dp()` method returns a similar tuple but with the dew point temperature (i.e. the temperature at which dew will form if the air is cooled adiabatically) instead of relative humidity. Both values are degrees Celsius.
+
+```python
+from sht30 import SHT30
+
+sensor = SHT30()
+
+temperature, dew_point = sensor.measure_dp()
+print('Temperature:', temperature, '°C, dew point:', dew_point, '°C')
+```
+
 There is another method, `measure_int()`, that returns 4 integer values, **no floating point operation is done**, designed 
 for environments that doesn't support floating point operations, the four values are: 
 

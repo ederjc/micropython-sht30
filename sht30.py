@@ -1,7 +1,7 @@
 from machine import I2C, Pin
 import time
 
-__version__ = '0.2.2'
+__version__ = '0.3.0'
 __author__ = 'Roberto Sánchez'
 __license__ = "Apache License 2.0. https://www.apache.org/licenses/LICENSE-2.0"
 
@@ -39,8 +39,9 @@ class SHT30():
     ENABLE_HEATER_CMD = b'\x30\x6D'
     DISABLE_HEATER_CMD = b'\x30\x66'
 
-    def __init__(self, scl_pin=5, sda_pin=4, delta_temp=0, delta_hum=0, i2c_address=DEFAULT_I2C_ADDRESS):
-        self.i2c = I2C(scl=Pin(scl_pin), sda=Pin(sda_pin))
+    def __init__(self, i2c=None, scl_pin=5, sda_pin=4, delta_temp=0, delta_hum=0, i2c_address=DEFAULT_I2C_ADDRESS):
+        if i2c: self.i2c = i2c
+        else: self.i2c = I2C(scl=Pin(scl_pin), sda=Pin(sda_pin))
         self.i2c_addr = i2c_address
         self.set_delta(delta_temp, delta_hum)
         time.sleep_ms(50)

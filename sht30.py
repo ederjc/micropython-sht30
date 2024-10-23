@@ -1,7 +1,7 @@
 from machine import I2C, Pin
 import time
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 __author__ = 'Roberto Sánchez'
 __license__ = "Apache License 2.0. https://www.apache.org/licenses/LICENSE-2.0"
 
@@ -85,14 +85,12 @@ class SHT30():
         The response data is validated by CRC
         """
         try:
-            self.i2c.start()
+            #self.i2c.start()
             self.i2c.writeto(self.i2c_addr, cmd_request)
             if not response_size:
-                self.i2c.stop()
                 return
             time.sleep_ms(read_delay_ms)
             data = self.i2c.readfrom(self.i2c_addr, response_size)
-            self.i2c.stop()
             for i in range(response_size//3):
                 if not self._check_crc(data[i*3:(i+1)*3]): # pos 2 and 5 are CRC
                     raise SHT30Error(SHT30Error.CRC_ERROR)
